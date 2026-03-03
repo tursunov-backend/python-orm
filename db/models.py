@@ -18,6 +18,6 @@ class User(Base):
 
     def __str__(self):
         return f'User(user_id={self.user_id}, username="{self.username}", first_name="{self.first_name}", last_name="{self.last_name}")'
-    
+
     def __repr__(self):
         return f'User(user_id={self.user_id}, username="{self.username}", first_name="{self.first_name}", last_name="{self.last_name}")'
