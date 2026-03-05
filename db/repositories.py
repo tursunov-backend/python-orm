@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import select, or_
 
 from .models import User, Profile, Post
 
@@ -24,9 +25,19 @@ class UserRepository:
         return user
 
     def get_all_users(self) -> list[User]:
-        users = self.session.query(User).all()
+        # users = self.session.query(User).all()
 
-        return users
+        stmt = select(User).where(
+            or_(User.first_name == "Ali", User.last_name == "Aliyev")
+        )
+        print(stmt)
+
+        users = self.session.execute(stmt)
+
+        for user in users:
+            print(user)
+
+        # return users
 
     def get_one_user(self, user_id: int) -> User:
         user = self.session.query(User).get(user_id)
@@ -74,3 +85,12 @@ class UserRepository:
         post = Post(user_id=user.user_id, title=title, content=content)
         self.session.add(post)
         self.session.commit()
+
+    def paginated_users(self, page: int = 1):
+        limit = 3
+        offset = (page - 1) * limit
+
+        stmt = select(User).offset(offset=offset).limit(limit=limit)
+
+        users = self.session.execute(stmt).all()
+        return users

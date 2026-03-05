@@ -24,7 +24,7 @@ class User(Base):
         return f'User(user_id={self.user_id}, username="{self.username}", first_name="{self.first_name}", last_name="{self.last_name}, profile={self.profile}")'
 
     def __repr__(self):
-        return f'User(user_id={self.user_id}, username="{self.username}", first_name="{self.first_name}", last_name="{self.last_name}, profile={self.profile}")'
+        return f"{self.username}"
 
 
 class Profile(Base):

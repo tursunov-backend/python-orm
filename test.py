@@ -67,7 +67,7 @@ def get_posts():
     print(user.posts)
 
 
-create_tables()
+# create_tables()
 # create_user()
 # get_users()
 # get_user()
@@ -76,4 +76,8 @@ create_tables()
 # update_user()
 # create_profile()
 # create_post()
-get_posts()
+# get_posts()
+
+
+users = user_repository.paginated_users(1)
+print(users)
